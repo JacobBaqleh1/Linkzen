@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom' ;
 import App from './App.tsx';
 import Login from './pages/Login.tsx';
+import ErrorPage from './pages/ErrorPage.tsx';
 
 const router = createBrowserRouter([
     {
@@ -9,10 +10,6 @@ const router = createBrowserRouter([
         element: <App />,
         errorElement: <ErrorPage />,
         children: [
-            {
-                index: true,
-                element: <HomePage />
-            },
             {
                 path: '/login',
                 element: <Login />
