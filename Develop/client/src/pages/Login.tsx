@@ -1,5 +1,5 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-
+import { useNavigate } from "react-router-dom"; //Importing useNavigate from react-router-dom
 import Auth from '../utils/auth';
 import { login } from "../api/authAPI";
 
@@ -8,6 +8,8 @@ const Login = () => {
     username: '',
     password: ''
   });
+
+  const navigate = useNavigate(); //Using useNavigate to redirect the user to the home page after login
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -26,6 +28,12 @@ const Login = () => {
       console.error('Failed to login', err);
     }
   };
+
+  // Function to navigate to the create user page
+  const handleCreateUser = () => {
+    navigate('/create-user');
+  };
+
 
   return (
     <div className='container'>
@@ -47,6 +55,7 @@ const Login = () => {
         />
         <button type='submit'>Submit Form</button>
       </form>
+      <button onClick={handleCreateUser}>Create User</button>
     </div>
     
   )
