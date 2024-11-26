@@ -12,9 +12,8 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    console.log(loginCheck);
     checkLogin();
-  }, [loginCheck])
+  }, []);
 
   return (
     <div className='nav'>
@@ -33,6 +32,7 @@ const Navbar = () => {
           <li className='nav-item'>
             <button type='button' onClick={() => {
               auth.logout();
+              setLoginCheck(false);
             }}>Logout</button>
           </li>
         )

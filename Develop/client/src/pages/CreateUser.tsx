@@ -1,18 +1,24 @@
 
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation
 import { createUser } from "../api/createAPI"; // API function for user creation
+import Auth from '../utils/auth';
 
 const CreateUser = () => {
   const [userData, setUserData] = useState({
-    id: 0,
-    name: '',
     username: '',
     email: '',
     password: ''
   });
 
-  const navigate = useNavigate(); // Using useNavigate to navigate
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to check if the user is logged in
+  const navigate = useNavigate(); // Using useNavigate to redirect the user to the home page after login
+
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,6 +41,12 @@ const CreateUser = () => {
 
   return (
     <div className="container">
+        {isLoggedIn ? (
+        <div>
+          <h1>User already logged in</h1>
+          <button onClick={() => navigate('/profile')}>Go to Profile</button>
+        </div>
+      ) : (
       <form className="form" onSubmit={handleSubmit}>
         <h1>Create User</h1>
         <label>Username</label>
@@ -60,6 +72,7 @@ const CreateUser = () => {
         />
         <button type="submit">Create User</button>
       </form>
+      )}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Login from './pages/Login.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import CreateUser from './pages/CreateUser.tsx';
 import HomePage from './pages/HomePage.tsx';
+import ProfilePage from './pages/ProfilePage.tsx';
 
 const router = createBrowserRouter([
     {
@@ -13,8 +14,12 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: '/',
+                index: true,
                 element: <HomePage />
+            },
+            {
+                path: '/profile',
+                element: <ProfilePage />
             },
             {
                 path: '/login',
@@ -25,10 +30,10 @@ const router = createBrowserRouter([
                 element: <CreateUser />
 
             }
-        
-]
-}
-])
+
+        ]
+    }
+]);
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
