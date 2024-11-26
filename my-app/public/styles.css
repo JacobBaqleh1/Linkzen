@@ -1,0 +1,78 @@
+/* public/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #00ff00, #008000); /* Default green gradient background */
+    background-size: cover;
+    background-position: center;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Optional: Add a background to make content more readable */
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+#profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+#links-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: white; /* Set button background to white */
+    border: 1px solid #ccc; /* Optional: Add a border to the button */
+    border-radius: 5px; /* Optional: Add rounded corners to the button */
+}
+
+@media (min-width: 600px) {
+    #app {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #profile {
+        margin-bottom: 0;
+    }
+}
