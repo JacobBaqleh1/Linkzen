@@ -9,7 +9,6 @@ const CreateUser = () => {
   const [newUser, setNewUser] = useState<UserData>({
     id: null,
     username: '',
-    email: '',
     password: ''
   });
 
@@ -22,7 +21,7 @@ const CreateUser = () => {
     }
   }, []);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUser((prevUser) => ({
       ...prevUser,
@@ -32,6 +31,10 @@ const CreateUser = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!newUser.username || !newUser.password) {
+      console.error("Both username and password are required");
+      return;
+    }
     try {
       const response = await createUser(newUser); // API call to create a new user
       console.log("User created successfully:", response);
@@ -56,13 +59,6 @@ const CreateUser = () => {
           type="text"
           name="username"
           value={newUser.username || ''}
-          onChange={handleChange}
-        />
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={newUser.email || ''}
           onChange={handleChange}
         />
         <label>Password</label>
