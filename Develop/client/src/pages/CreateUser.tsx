@@ -38,6 +38,7 @@ const CreateUser = () => {
     try {
       const response = await createUser(newUser); // API call to create a new user
       console.log("User created successfully:", response);
+      alert("User created successfully!");
       navigate("/login"); // Redirect to login page after successful creation
     } catch (err) {
       console.error("Error creating user:", err);
