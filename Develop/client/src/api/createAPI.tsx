@@ -1,12 +1,9 @@
-interface UserData {
-    username: string;
-    email: string;
-    password: string;
-}
+import { UserData } from '../interfaces/UserData';
+import Auth from '../utils/auth';
 
 
 // Create a user
-const createUser = async (userData: UserData) => {
+const createUser = async (body: UserData) => {
     try {
         const response = await fetch('/api/users', {
         method: 'POST',
