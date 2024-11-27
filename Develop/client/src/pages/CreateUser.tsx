@@ -2,10 +2,12 @@
 import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation
 import { createUser } from "../api/createAPI"; // API function for user creation
+import { UserData } from "../interfaces/UserData"; // Importing the UserData interface
 import Auth from '../utils/auth';
 
 const CreateUser = () => {
-  const [userData, setUserData] = useState({
+  const [newUser, setNewUser] = useState<UserData>({
+    id: null,
     username: '',
     email: '',
     password: ''
@@ -20,18 +22,18 @@ const CreateUser = () => {
     }
   }, []);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setUserData({
-      ...userData,
+    setNewUser((prevUser) => ({
+      ...prevUser,
       [name]: value
-    });
-  };
+    }));
+  };  
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const response = await createUser(userData); // API call to create a new user
+      const response = await createUser(newUser); // API call to create a new user
       console.log("User created successfully:", response);
       navigate("/login"); // Redirect to login page after successful creation
     } catch (err) {
@@ -53,21 +55,21 @@ const CreateUser = () => {
         <input
           type="text"
           name="username"
-          value={userData.username}
+          value={newUser.username || ''}
           onChange={handleChange}
         />
         <label>Email</label>
         <input
           type="email"
           name="email"
-          value={userData.email}
+          value={newUser.email || ''}
           onChange={handleChange}
         />
         <label>Password</label>
         <input
           type="password"
           name="password"
-          value={userData.password}
+          value={newUser.password || ''}
           onChange={handleChange}
         />
         <button type="submit">Create User</button>
