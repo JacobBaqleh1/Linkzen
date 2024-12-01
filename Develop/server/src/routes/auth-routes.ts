@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { User } from '../models/user.js';
+import { createUser } from '../controllers/user-controller.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -35,5 +36,7 @@ const router = Router();
 
 // POST /login - Login a user
 router.post('/login', login);
+
+router.post('/create-user', createUser); // Define the createUser route
 
 export default router;

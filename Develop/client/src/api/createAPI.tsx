@@ -1,16 +1,15 @@
 import { UserData } from '../interfaces/UserData';
-import Auth from '../utils/auth';
 
 
 // Create a user
 const createUser = async (body: UserData) => {
     try {
-        const response = await fetch('/api/users', {
+        const response = await fetch('/auth/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(body),
         });
         const data = await response.json();
     
@@ -21,8 +20,8 @@ const createUser = async (body: UserData) => {
         return data;
     
     } catch (err) {
-        console.log('Error from user creation:', err);
-        return Promise.reject('Could not create user');
+        console.error('Error from user creation:', err);
+        throw new Error('Could not create user');
     }
     };
 
