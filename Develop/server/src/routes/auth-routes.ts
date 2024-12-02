@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import { Router, Request, Response } from "express";
 import { User } from "../models/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+=======
+import { Router, Request, Response } from 'express';
+import { User } from '../models/user.js';
+import { createUser } from '../controllers/user-controller.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+>>>>>>> 3aaee83992ec7ee8747ba7d692e953a551ee7e19
 
 export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body; // Extract username and password from request body
@@ -37,5 +45,7 @@ const router = Router();
 
 // POST /login - Login a user
 router.post("/login", login);
+
+router.post('/create-user', createUser); // Define the createUser route
 
 export default router;

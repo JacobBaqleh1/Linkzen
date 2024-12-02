@@ -4,7 +4,6 @@ import App from "./App.tsx";
 import Login from "./pages/Login.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import CreateUser from "./pages/CreateUser.tsx";
-import HomePage from "./pages/HomePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import CreateCard from "./pages/CreateCard.tsx";
 
@@ -16,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <ProfilePage />,
       },
       {
         path: "/profile",
