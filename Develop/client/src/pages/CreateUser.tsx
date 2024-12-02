@@ -1,16 +1,15 @@
-
 import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation
 import { createUser } from "../api/createAPI"; // API function for user creation
 import { UserData } from "../interfaces/UserData"; // Importing the UserData interface
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const CreateUser = () => {
   const [newUser, setNewUser] = useState<UserData>({
     id: null,
-    username: '',
-    email: '',
-    password: ''
+    username: "",
+    email: "",
+    password: "",
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to check if the user is logged in
@@ -22,13 +21,15 @@ const CreateUser = () => {
     }
   }, []);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setNewUser((prevUser) => ({
       ...prevUser,
-      [name]: value
+      [name]: value,
     }));
-  };  
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -43,37 +44,37 @@ const CreateUser = () => {
 
   return (
     <div className="container">
-        {isLoggedIn ? (
+      {isLoggedIn ? (
         <div>
           <h1>User already logged in</h1>
-          <button onClick={() => navigate('/profile')}>Go to Profile</button>
+          <button onClick={() => navigate("/profile")}>Go to Profile</button>
         </div>
       ) : (
-      <form className="form" onSubmit={handleSubmit}>
-        <h1>Create User</h1>
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          value={newUser.username || ''}
-          onChange={handleChange}
-        />
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={newUser.email || ''}
-          onChange={handleChange}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={newUser.password || ''}
-          onChange={handleChange}
-        />
-        <button type="submit">Create User</button>
-      </form>
+        <form className="form" onSubmit={handleSubmit}>
+          <h1>Create User</h1>
+          <label>Username</label>
+          <input
+            type="text"
+            name="username"
+            value={newUser.username || ""}
+            onChange={handleChange}
+          />
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={newUser.email || ""}
+            onChange={handleChange}
+          />
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={newUser.password || ""}
+            onChange={handleChange}
+          />
+          <button type="submit">Create User</button>
+        </form>
       )}
     </div>
   );
