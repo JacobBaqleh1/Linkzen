@@ -80,7 +80,7 @@ const ProfilePage = () => {
       ) : (
         <div className="flex flex-col items-center justify-center p-6">
           <h1 className="text-3xl font-bold mb-6">
-            You are logged into the Profile Page
+           Welcome to your personal zen space 
           </h1>
           {/* Conditionally render the Create Card button only if no card exists */}
           {!card && (
