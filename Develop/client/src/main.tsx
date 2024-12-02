@@ -6,6 +6,7 @@ import ErrorPage from "./pages/ErrorPage.tsx";
 import CreateUser from "./pages/CreateUser.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import CreateCard from "./pages/CreateCard.tsx";
+import UpdateCard from "./pages/UpdateCard.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/create-card",
         element: <CreateCard />,
+      },
+      {
+        path: "/update-card/:id",
+        element: <UpdateCard />,
       },
     ],
   },

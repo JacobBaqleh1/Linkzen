@@ -45,30 +45,57 @@ const CreateUser = () => {
   };
 
   return (
-    <div className="container">
+    <div className="min-h-screen bg-black text-white flex justify-center items-center">
       {isLoggedIn ? (
-        <div>
-          <h1>User already logged in</h1>
-          <button onClick={() => navigate("/profile")}>Go to Profile</button>
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">User already logged in</h1>
+          <button
+            onClick={() => navigate("/profile")}
+            className="bg-blue-500 hover:bg-blue-400 text-white py-2 px-6 rounded-md"
+          >
+            Go to Profile
+          </button>
         </div>
       ) : (
-        <form className="form" onSubmit={handleSubmit}>
-          <h1>Create User</h1>
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            value={newUser.username || ""}
-            onChange={handleChange}
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={newUser.password || ""}
-            onChange={handleChange}
-          />
-          <button type="submit">Create User</button>
+        <form
+          className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md"
+          onSubmit={handleSubmit}
+        >
+          <h1 className="text-3xl font-bold text-center mb-6">Create User</h1>
+          <div className="mb-4">
+            <label className="block text-lg mb-2" htmlFor="username">
+              Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              value={newUser.username || ""}
+              onChange={handleChange}
+              className="w-full p-3 text-black rounded-md border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-lg mb-2" htmlFor="password">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={newUser.password || ""}
+              onChange={handleChange}
+              className="w-full p-3 text-black rounded-md border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-green-500 hover:bg-green-400 text-white py-2 px-6 rounded-md w-full"
+          >
+            Create User
+          </button>
         </form>
       )}
     </div>

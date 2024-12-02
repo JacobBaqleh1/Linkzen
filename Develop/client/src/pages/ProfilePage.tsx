@@ -25,16 +25,12 @@ const ProfilePage = () => {
     try {
       const data = await retrieveCard();
 
-      if (!data) {
-        navigate("/create-card");
-        return;
-      }
       // If a card is found, set it
       setCard(data); // Now data should be a single card object
     } catch (err) {
       console.error("Failed to retrieve card:", err);
     }
-  }, [navigate]);
+  }, []);
 
   useLayoutEffect(() => {
     checkLogin();
@@ -56,67 +52,91 @@ const ProfilePage = () => {
     // Navigate to signup page
     navigate("/create-user");
   };
+
+  const handleUpdateCard = () => {
+    if (card) {
+      navigate(`/update-card/${card.id}`);
+    }
+  };
+
   return (
-    <>
+    <div className="min-h-screen bg-black text-white">
       {!loginCheck ? (
-        <div>
-          <h1>
-            Login to create & view profile
-            <div style={{ textAlign: "center", marginTop: "50px" }}>
-              <h1>Welcome to the LinkZen</h1>
-              <button
-                onClick={handleLogin}
-                style={{ margin: "10px", padding: "10px 20px" }}
-              >
-                Login
-              </button>
-              <button
-                onClick={handleCreateUser}
-                style={{ margin: "10px", padding: "10px 20px" }}
-              >
-                Create User
-              </button>
-            </div>
-          </h1>
+        <div className="flex flex-col items-center justify-center p-6 text-center">
+          <h1 className="text-4xl mb-4">Welcome to LinkZen</h1>
+          <button
+            onClick={handleLogin}
+            className="bg-blue-500 hover:bg-blue-400 text-white py-2 px-6 rounded-md mb-4"
+          >
+            Login
+          </button>
+          <button
+            onClick={handleCreateUser}
+            className="bg-green-500 hover:bg-green-400 text-white py-2 px-6 rounded-md"
+          >
+            Create User
+          </button>
         </div>
       ) : (
-        <div>
-          <h1>You are logged into Profile Page</h1>
-          <Link to="/create-card">Create Your Zenlink Card!</Link>
+        <div className="flex flex-col items-center justify-center p-6">
+          <h1 className="text-3xl font-bold mb-6">
+            You are logged into the Profile Page
+          </h1>
+          {/* Conditionally render the Create Card button only if no card exists */}
+          {!card && (
+            <Link
+              to="/create-card"
+              className="bg-blue-500 hover:bg-blue-400 text-white py-2 px-6 rounded-md mb-6"
+            >
+              Create Your Zenlink Card!
+            </Link>
+          )}
+          {card && (
+            <button
+              onClick={handleUpdateCard}
+              className="bg-yellow-500 hover:bg-yellow-400 text-white py-2 px-6 rounded-md"
+            >
+              Update Card
+            </button>
+          )}
           {/* Conditionally render the user's card */}
-          <div>
+          <div className="text-center space-y-6">
             {card ? (
-              <div className="text-2xl border-8 border-black rounded-lg">
-                <p>@ {card.username}</p>
-                <div>
-                  <h3>Links:</h3>
+              <div className="bg-gray-800 border-4 border-gray-600 rounded-lg p-6 shadow-lg">
+                <p className="text-xl font-semibold">@ {card.username}</p>
+                <div className="mt-4">
+                  {card.links.length > 0 && (
+                    <h3 className="text-lg font-semibold">Links:</h3>
+                  )}
                   {card.links.map((link, index) => (
-                    <div key={index}>
+                    <div key={index} className="mt-2">
                       <a
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="text-blue-400 hover:text-blue-300"
                       >
                         {link.description}
                       </a>
                     </div>
                   ))}
                 </div>
-                <div className="flex justify-center items-center min-h-screen">
+
+                <div className="mt-6 flex justify-center items-center">
                   <img
-                    className="w-32 h-32"
-                    src="../../public/zenlink.png"
+                    className="w-32 h-32 rounded-full"
+                    src="../../zenlink.png"
                     alt="ZenLink"
                   />
                 </div>
               </div>
             ) : (
-              <p>No card found. Please create your card.</p>
+              <p className="text-xl">No card found. Please create your card.</p>
             )}
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
