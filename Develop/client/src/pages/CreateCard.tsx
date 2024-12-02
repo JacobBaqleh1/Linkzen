@@ -41,18 +41,18 @@ export default function CreateCard() {
   // Handle confirm link addition
   const handleConfirmLink = () => {
     setNewCard((prev) => {
-      if (!prev) return prev; // Ensure prev is defined
+      if (!prev) return prev;
       const updatedLinks =
         editIndex !== null
-          ? // Update an existing link
-            prev.links.map((link, index) =>
+          ? prev.links.map((link, index) =>
               index === editIndex ? newLink : link
             )
-          : // Add new link
-            [...prev.links, newLink];
+          : [...prev.links, newLink];
 
       return { ...prev, links: updatedLinks };
     });
+    setNewLink({ url: "", description: "" }); // Reset the input fields
+    setEditIndex(null); // Reset the edit index
   };
 
   const handleEditLink = (index: number) => {
